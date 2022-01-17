@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-// GET all users
+// get all users
 router.get('/', (req, res) => {
     User.findAll({
         attributes: { exclude: ['password'] }
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
         });
 });
 
-// GET user by id
+// get user by id
 router.get('/:id', (req, res) => {
     User.findOne({
         attributes: { exlude: ['password'] },
@@ -49,7 +49,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-// POST new user
+// create new user
 router.post('/', withAuth, (req, res) => {
     User.create({
         username: req.body.username,
@@ -109,7 +109,7 @@ router.post('/logout', withAuth, (req, res) => {
     }
 });
 
-// updated specific user by id
+// update specific user by id
 router.put('/:id', withAuth, (req, res) => {
     User.update(req.body, {
         individualHooks: true,
