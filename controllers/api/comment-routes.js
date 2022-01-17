@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Comment } = require('../../models');
 const yesAuthorized = require('../../utils/auth');
 
-// get all comments
+// get all comments, api/comments
 router.get('/', (req, res) => {
     Comment.findAll()
         .then(dbCommentInfo => res.json(dbCommentInfo))
@@ -14,18 +14,17 @@ router.get('/', (req, res) => {
 
 // create new comment
 router.post('/', yesAuthorized, (req, res) => {
-    if (req.session) {
-        Comment.create({
-            comment_text: req.body.comment_text,
-            post_id: req.body.post_id,
-            user_id: req.session.user_id
-        })
-            .then(dbCommentInfo => res.json(dbCommentInfo))
-            .catch(err => {
-                console.log(err);
-                res.status(400).json(err);
-            });
-    }
+    Comment.create({
+        comment_text: req.body.comment_text,
+        post_id: req.body.post_id,
+        user_id: req.session.user_id
+    })
+        .then(dbCommentInfo => res.json(dbCommentInfo))
+        .catch(err => {
+            console.log(err);
+            res.status(400).json(err);
+        });
+    
 });
 
 // delete comment

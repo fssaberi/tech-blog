@@ -11,7 +11,7 @@ Comment.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
-            autoincrement: true
+            autoIncrement: true
         },
         comment_text: {
             type: DataTypes.STRING,
