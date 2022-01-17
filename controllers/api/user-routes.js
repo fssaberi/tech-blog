@@ -38,7 +38,7 @@ router.get('/:id', (req, res) => {
     })
         .then(dbUserInfo => {
             if (!dbUserInfo) {
-                res.status(404).json({ message: 'There is no user in our database with this same id' });
+                res.status(404).json({ message: 'Sorry, there is no user in our database with this same id' });
                 return;
             }
             res.json(dbUserInfo);
@@ -79,13 +79,13 @@ router.post('/login', withAuth, (req, res) => {
     })
         .then(dbUserInfo => {
             if(!dbUserInfo) {
-                res.status(400).json({ message: 'There is no user in our database with this email.' });
+                res.status(400).json({ message: 'Sorry, there is no user in our database with this email.' });
                 return;
             }
 
             const passwordTrue = dbUserInfo.checkPassword(req.body.password);
             if(!passwordTrue) {
-                res.status(400).json({ message: 'This is the wrong password. '});
+                res.status(400).json({ message: 'Sorry, this is the wrong password. '});
                 return;
             }
 
@@ -119,7 +119,7 @@ router.put('/:id', withAuth, (req, res) => {
     })
         .then(dbUserInfo => {
             if (!dbUserInfo[0]) {
-                res.status(404).json({ message: 'There is no user in our system with this id.' });
+                res.status(404).json({ message: 'Sorry, there is no user in our system with this id.' });
                 return;
             }
             res.json(dbUserInfo);
@@ -139,7 +139,7 @@ router.delete('/:id', withAuth, (req, res) => {
     })
         .then(dbUserInfo => {
             if (!dbUserInfo) {
-                res.status(404).json({ message: 'There is no user in our system with this id.' });
+                res.status(404).json({ message: 'Sorry, there is no user in our system with this id.' });
                 return;
             }
             res.json(dbUserInfo);
