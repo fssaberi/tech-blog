@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 const yesAuthorized = require('../../utils/auth');
 
-// get all users
+// get all users, /api/users
 router.get('/', (req, res) => {
     User.findAll({
         attributes: { exclude: ['password'] }
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
         });
 });
 
-// get user by id
+// get user by id, /api/users/1
 router.get('/:id', (req, res) => {
     User.findOne({
         attributes: { exlude: ['password'] },
