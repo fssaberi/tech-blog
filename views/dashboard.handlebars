@@ -3,6 +3,7 @@
 
   <form class="new-post-form">
     <div>
+      <a href="/dashboard/create/"></a>
       <label for="post-title">Title</label>
       <input type="text" id="post-title" name="post-title" />
     </div>
@@ -17,14 +18,12 @@
 {{#if posts.length}}
 <section>
   <h2>My Posts</h2>
-  <ol>
+  <div>
     {{#each posts as |post|}}
-    <li>
       {{> post-info post}}
       <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
-    </li>
-    {{/each}}
-  </ol>
+  </div>
+  {{/each}}
 </section>
 {{/if}}
 
