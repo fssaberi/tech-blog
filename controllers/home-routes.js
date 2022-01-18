@@ -54,7 +54,9 @@ router.get('/signup', (req, res) => {
         res.redirect('/');
         return;
     }
-})
+
+    res.render('signup');
+});
 
 router.get('/post/:id', (req, res) => {
     Post.findOne({

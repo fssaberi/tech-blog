@@ -61,6 +61,7 @@ router.post('/', yesAuthorized, (req, res) => {
                 req.session.user_id = dbUserInfo.id;
                 req.session.username = dbUserInfo.username;
                 req.session.loggedIn = true;
+
                 res.json(dbUserInfo);
             });
         })
@@ -99,7 +100,7 @@ router.post('/login', yesAuthorized, (req, res) => {
 });
 
 // log out current user
-router.post('/logout', yesAuthorized, (req, res) => {
+router.post('/logout', (req, res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {
             res.status(204).end();
