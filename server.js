@@ -11,17 +11,19 @@ const PORT = process.env.PORT || 3001;
 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const aSession = {
+const sess = {
     secret: 'something secret',
-    cookie: {},
-    resave: false,
+    cookie: {
+        expires: 20 * 50 * 1000
+    },
+    resave: true,
     saveUninitialized: true,
     store: new SequelizeStore({
         db: sequelize
     })
 };
 
-app.use(session(aSession));
+app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
