@@ -16,7 +16,7 @@ async function newPost(event) {
     });
   
     if (response.ok) {
-      document.location.replace('/dashboard');
+      window.location.reload('/dashboard');
     } else {
       alert(response.statusText);
     }

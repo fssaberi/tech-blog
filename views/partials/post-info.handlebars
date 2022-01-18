@@ -1,7 +1,12 @@
 <article class="post">
   <div class="title">
-    <div> {{title}} </div>
-    <div> {{post_content}} </div>
+    <h3> {{title}} </h3>
+  </div>
+  <div class="post-content">
+    {{post_content}}
+  </div>
+  <div class="meta">
+    {{user.username}} on {{format_date created_at}}
   </div>
   <div class="meta">
     <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
