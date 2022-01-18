@@ -20,7 +20,7 @@ async function addComment(event) {
         });
 
         if (response.ok) {
-            document.location.reload();
+            window.location.reload();
         } else {
             alert(response.statusText)
         }
