@@ -4,7 +4,6 @@ const { User, Post, Comment } = require('../models');
 const yesAuthorized = require('../utils/auth');
 
 router.get('/', yesAuthorized, (req, res) => {
-    console.log(req.session);
     Post.findAll({
         where: {
             user_id: req.session.user_id
@@ -67,18 +66,19 @@ router.get('/edit/:id', yesAuthorized, (req, res) => {
         ]
     })
         .then(dbPostInfo => {
-            if (dbPostInfo) {
-                const post = dbPostInfo.get({ plain: true });
-
-                res.render('edit-post', {
-                    post,
-                    loggedIn: true
-                });
-            } else {
-                res.status(404).end();
+            if (!dbPostInfo) {
+                res.status(404).json({ message: 'Sorry, there is  no post with this specific id.' });
+                return;
             }
+            const post = dbPostInfo.get({ plain: true });
+
+            res.render('edit-post', {
+                post,
+                loggedIn: true
+            });
         })
         .catch(err => {
+            console.log(err);
             res.status(500).json(err);
         });
 });
@@ -86,7 +86,7 @@ router.get('/edit/:id', yesAuthorized, (req, res) => {
 router.get('/create/', yesAuthorized, (req, res) => {
     Post.findAll({
         where: {
-            id: req.params.id
+            user_id: req.session.user_id
         },
         attributes: [
             'id',
